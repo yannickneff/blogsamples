@@ -7,7 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.min.js"></script>
 </head>
 <body>
-  <div id='root'></div>
+  <div id='Compteur'></div>
   	<button id="plus">PLUS</button>
 	<button id="moins" onClick="store.dispatch({type : 'moins'} )">MOINS</button>
 
@@ -26,7 +26,7 @@
  	var store = Redux.createStore(counter)
 
 	const render = () => {
-		document.getElementById('root').innerHTML = store.getState() + " fois";
+		document.getElementById('Compteur').innerHTML = store.getState() + " fois";
 	}
 
 	// ajoute l'evenement OnClick au boutton plus
