@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Exemple Compteur Redux et Middleware</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.min.js"></script>
+</head>
+<body>
+<div id='Compteur'></div>
+<button id="plus">PLUS</button>
+<button id="moins" onClick="store.dispatch({type : 'moins'} )">MOINS</button>
+   <script type="text/javascript">
+   const counter = (state = 0, action) => {
+     switch (action.type) {
+     case 'plus':
+       return state + 1;
+     case 'moins':
+       return state - 1;
+     default:
+       return state;
+    }
+  }
+  const logger = store => next => action => {
+    console.log('dispatching', action)
+    let result = next(action)
+    console.log('next state', store.getState())
+    return result
+   }
+
+  var store = Redux.createStore(counter, Redux.applyMiddleware(logger))
+  const render = () => {
+    document.getElementById('Compteur').innerHTML = store.getState() + " fois";
+  }
+  // ajoute l'evenement OnClick au boutton plus
+  document.getElementById('plus').addEventListener('click', () => {store.dispatch({type : 'plus'} )});
+  store.subscribe(render);
+  render();
+</script>
+</body>
+</html>
